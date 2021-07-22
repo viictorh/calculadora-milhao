@@ -1,5 +1,5 @@
 import "./layout/app.css";
-import { Container } from "@material-ui/core";
+import { Container, Divider, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import Header from "./components/Header";
 import NumberInput from "./components/NumberInput";
@@ -10,6 +10,67 @@ import {
   calcAge,
   calcFV,
 } from "./util/Math";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import PersonIcon from "@material-ui/icons/Person";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import IconLabel from "./components/IconLabel";
+import MillionDetail from "./components/MillionDetail";
+
+const calculateResult = (inputData) => {
+  const { moneyStart, contribution, age, interestRate, inflation, taxes } =
+    inputData;
+
+  const realInterestRate = calcRealInterestRate(interestRate, taxes, inflation);
+  const time = calcNPER(
+    calcRate(realInterestRate),
+    -contribution,
+    -moneyStart,
+    1_000_000,
+    0
+  );
+  const goalAge = calcAge(age, time);
+  const value = -calcFV(
+    calcRate(interestRate),
+    time,
+    contribution,
+    moneyStart,
+    0
+  );
+
+  return { realInterestRate, time, goalAge, value };
+};
+
+const renderResult = (result) => {
+  const { realInterestRate, time, goalAge, value } = result;
+
+  return (
+    <div className="result-block">
+      <Typography variant="h4" align="center">
+        Resultado
+      </Typography>
+
+      <div className="result-block-content">
+        <IconLabel
+          Icon={TrendingUpIcon}
+          label="Juros reais"
+          value={realInterestRate}
+        />
+        <IconLabel Icon={CalendarTodayIcon} label="Meses" value={time} />
+        <IconLabel
+          Icon={PersonIcon}
+          label="Idade ao atingir objetivo"
+          value={goalAge}
+        />
+        <IconLabel
+          Icon={AttachMoneyIcon}
+          label="Montante acumulado"
+          value={value}
+        />
+      </div>
+    </div>
+  );
+};
 
 const App = () => {
   const [moneyStart, setMoneyStart] = useState(10000);
@@ -18,23 +79,21 @@ const App = () => {
   const [interestRate, setInterestRate] = useState(8);
   const [inflation, setInflation] = useState(4.5);
   const [taxes, setTaxes] = useState(15);
-  let jurosreal = calcRealInterestRate(interestRate, taxes, inflation);
-  let tempo = calcNPER(
-    calcRate(jurosreal),
-    -contribution,
-    -moneyStart,
-    1_000_000,
-    0
-  );
 
-  const showResult = () => {
-    return <div>mooooney: {this.moneyStart}</div>;
+  const inputData = {
+    moneyStart,
+    contribution,
+    age,
+    interestRate,
+    inflation,
+    taxes,
   };
+  const result = calculateResult(inputData);
 
   return (
     <div>
       <Header />
-      <Container>
+      <Container className="styled">
         <form noValidate>
           <div className="input-data">
             <NumberInput
@@ -77,27 +136,11 @@ const App = () => {
               handleChange={setTaxes}
               adorment="%"
             />
-            <br></br>
-            Juros reais: {jurosreal}
-            <br></br>
-            Meses: {tempo}
-            <br></br>
-            Idade ao atingir objetivo: {calcAge(age, tempo)}
-            <br></br>
-            Montante acumulado:
-            {
-              -calcFV(
-                calcRate(interestRate),
-                tempo,
-                contribution,
-                moneyStart,
-                0
-              )
-            }
           </div>
-
-          {this.showResult()}
         </form>
+        {renderResult(result)}
+
+        <MillionDetail />
       </Container>
     </div>
   );
