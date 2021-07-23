@@ -64,7 +64,7 @@ const renderResult = (result) => {
         />
         <IconLabel
           Icon={AttachMoneyIcon}
-          label="Montante acumulado"
+          label="Valor acumulado"
           value={value}
         />
       </div>
@@ -98,7 +98,7 @@ const App = () => {
           <div className="input-data">
             <NumberInput
               id="dinheiro-inicial"
-              label="Montante inicial"
+              label="Valor inicial"
               value={moneyStart}
               handleChange={setMoneyStart}
             />
