@@ -1,12 +1,14 @@
-import { Divider, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import DetailByTime from "./DetailByTime";
+import DetailByInvestment from "./DetailByInvestment";
 
-const MillionDetail = () => {
+const MillionDetail = ({ type }) => {
   return (
     <div>
       <Typography variant="h4" align="center">
         Alcançando o primeiro milhão
       </Typography>
-      <Typography variant="body">
+      <Typography variant="body2">
         Muitas pessoas desejam alcançar o primeiro milhão e muitas buscam
         calculadoras para mostrar quando e quanto poupar para alcançar este
         objetivo, porém muitas dessas calculadoras ignoram uma questão simples:
@@ -22,107 +24,28 @@ const MillionDetail = () => {
         ajustar os valores de acordo.
       </Typography>
 
-      <Typography variant="body">Calculadora do Milhão</Typography>
-
-      <Typography variant="body">
-        Para realizar a simulação voce pode utilizar duas formas:
+      <Typography variant="h5" style={{ paddingTop: "30" }}>
+        Para calcular quando voce alcançará o primeiro milhão, voce pode
+        utilizar 2 formas:
       </Typography>
       <ul>
         <li>
-          <Typography variant="body">
-            Tempo necessário - Quanto tempo voce demoraria para chegar a 1
-            milhão de reais baseando-se, primordialmente, no valor que voce
+          <Typography variant="body2">
+            <b> Tempo necessário </b>- Quanto tempo voce demoraria para chegar à
+            1 milhão de reais baseando-se, primordialmente, no valor que voce
             consegue aportar mensalmente.
           </Typography>
         </li>
         <li>
-          <Typography variant="body">
-            Aporte mensal - Quanto voce deveria aportar (investir mensalmente)
-            para chegar a 1 milhão de reais dentro do prazo estipulado.
-          </Typography>
-        </li>
-      </ul>
-      <Typography variant="body">Tempo necessário</Typography>
-
-      <Typography variant="body">
-        Para calcular o tempo necessário para ficar rico, é necessário informar:
-      </Typography>
-
-      <ul>
-        <li>
-          <Typography variant="body">
-            Valor inicial: quanto você já acumulou até o presente momento.
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Aporte mensal: quanto você consegue investir mensalmente.
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body"> Idade atual. </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Taxa de juros: rentabilidade aproximada/esperada de sua carteira de
-            investimentos.
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Inflação anual: expectativa de inflação (utilizei 5% ao ano, por se
-            tratar da inflação atual aproximada).
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Imposto de renda: incidência do IR sobre seus investimentos
-            (utilizei a alíquota de 15%).
+          <Typography variant="body2">
+            <b> Aporte mensal </b>- Quanto voce deveria aportar (investir
+            mensalmente) para chegar a 1 milhão de reais dentro do prazo
+            estipulado.
           </Typography>
         </li>
       </ul>
 
-      <Typography variant="body">Aporte necessário para ficar rico </Typography>
-
-      <Typography variant="body">
-        Para calcular o aporte mensal necessário para alcançar o primeiro
-        milhão, é necessário informar:
-      </Typography>
-
-      <ul>
-        <li>
-          <Typography variant="body">
-            Valor inicial: quanto você já acumulou até o presente momento.
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Período para atingir objetivo: em quanto tempo você pretende
-            alcançar o primeiro milhão.
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body"> Idade atual. </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Taxa de juros: rentabilidade aproximada/esperada de sua carteira de
-            investimentos.
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Inflação anual: expectativa de inflação (utilizei 5% ao ano, por se
-            tratar da inflação atual aproximada).
-          </Typography>
-        </li>
-        <li>
-          <Typography variant="body">
-            Imposto de renda: incidência do IR sobre seus investimentos
-            (utilizei a alíquota de 15%).
-          </Typography>
-        </li>
-      </ul>
+      {type === "TIME" ? <DetailByTime /> : <DetailByInvestment />}
     </div>
   );
 };

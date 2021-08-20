@@ -1,5 +1,6 @@
 .input-data > div {
-  margin: 5px;
+  margin: 20px 5px;
+  max-width: 195px;
 }
 
 .styled h4 {

@@ -5,8 +5,9 @@ import { toMoney } from "../util/Formatter";
 const NumberInput = ({ id, label, value, handleChange, adorment = "R$" }) => {
   const formatMoney = (e) => {
     //trata e formata o número
-
-    handleChange(e.target.value);
+    let result = e.target.value;
+    console.log("numberinput", result, +result || 0, isNaN(result));
+    result = +result ? handleChange(parseFloat(result)) : handleChange(0);
   };
 
   return (

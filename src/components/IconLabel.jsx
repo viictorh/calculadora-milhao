@@ -13,7 +13,7 @@ const IconLabel = ({ Icon, label, value }) => {
       >
         {label}
       </Typography>
-      <Typography variant="body" className="icon-label-value">
+      <Typography variant="body2" className="icon-label-value">
         {value}
       </Typography>
     </div>
