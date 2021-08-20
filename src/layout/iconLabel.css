@@ -1,0 +1,9 @@
+.icon-label {
+  position: relative;
+  display: inline-block;
+  min-width: 200px;
+}
+
+.icon-label svg {
+  float: left;
+}

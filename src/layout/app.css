@@ -1,0 +1,13 @@
+.input-data > div {
+  margin: 20px 5px;
+  max-width: 195px;
+}
+
+.styled h4 {
+  margin: 15px 0;
+}
+
+.result-block-content {
+  display: flex;
+  justify-content: center;
+}
